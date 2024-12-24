@@ -1,0 +1,529 @@
+::selection {
+   background-color: transparent;
+   color: var(--contentColor);
+}
+
+#time *::selection {
+   background-color: transparent;
+   color: transparent;
+}
+
+::-webkit-scrollbar {
+   width: 5px;
+   height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #fff;
+   border-radius: 100px;
+}
+
+:root {
+   --loadBgColor: #111;
+   --loadColor: #fff;
+   --bgColor: #333;
+   --contentColor: #ed8;
+}
+
+body {
+   background-color: var(--bgColor);
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   transition: background-color .4s ease;
+   -webkit-tap-highlight-color: transparent;
+}
+
+#loadCircle {
+   background-color: var(--loadBgColor);
+   border-radius: 50%;
+   z-index: 5;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: none;
+   border: 0.1px solid #aaa;
+}
+
+@keyframes expand {
+   from {
+       width: 0;
+       height: 0;
+   }
+   to {
+       width: 150vmax;
+       height: 150vmax;
+   }
+}
+
+@keyframes shrink {
+   from {
+       width: 150vmax;
+       height: 150vmax;
+   }
+   to {
+       width: 0;
+       height: 0;
+   }
+}
+
+#loadOverlay {
+   background-color: var(--loadBgColor);
+   font-family: "Rethink Sans", "Kosugi";
+   overflow: auto;
+   display: none;
+   opacity: 0;
+   flex-direction: column;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 6;
+   transition: all .6s;
+   transform: scale(0.8);
+}
+
+#loadPopup {
+   background-color: var(--loadBgColor);
+   color: var(--loadColor);
+   margin: auto;
+   font-size: 14px;
+   line-height: 1.8;
+   padding: 15px;
+   flex: 1;
+}
+
+#contact {
+   font-size: 12px;
+   color: var(--loadColor);
+   text-align: center;
+   margin: auto;
+   padding: 25px 15px;
+   line-height: 1.8;
+}
+
+.contact::before {
+   content: "";
+   background-image: url(https://jimajimax.github.io/circlock/img/x-white.svg);
+   display: inline-flex;
+   width: 8.5px;
+   height: 8.5px;
+   background-size: contain;
+   background-repeat: no-repeat;
+   margin-left: 5px;
+}
+
+.contact {
+   color: #7df;
+   margin-right: 5px;
+}
+
+.contact:hover,
+.contact:visited:hover {
+   color: #f55;
+}
+
+.contact:visited {
+   color: #fd0;
+}
+
+h1 {
+   border-bottom: 5px solid;
+   font-size: 40px;
+}
+
+#accessBox {
+   font-size: 11.5px;
+   margin: 0 25px;
+   border: 1.5px solid #ccc;
+   border-radius: 15px;
+   padding: 5px 15px;
+}
+
+ul {
+   padding: 0 15px 0 30px;
+}
+
+#loadCloseBtn {
+   min-width: 50%;
+   margin: 40px auto;
+   padding: 10px 30px;
+   display: block;
+   color: var(--loadColor);
+   background-color: var(--loadBgColor);
+   border: solid 2px var(--loadColor);
+   font-size: 20px;
+   font-weight: bold;
+   letter-spacing: 1px;
+   border-radius: 18px;
+   cursor: pointer;
+}
+
+#loadCloseBtn:hover {
+   color: var(--loadBgColor);
+   background-color: var(--loadColor);
+}
+
+#circle {
+   width: 280px;
+   height: 280px;
+   border: 2px solid var(--contentColor);
+   border-radius: 50%;
+   position: relative;
+   cursor: crosshair;
+   transition: border-color .4s ease;
+}
+
+#dot {
+   background-color: var(--contentColor);
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   position: absolute;
+   transition: background-color .4s ease;
+}
+
+#pipBody {
+   background-color: var(--bgColor);
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   transition: background-color .4s ease;
+}
+
+#Container {
+   color: var(--contentColor);
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%) scale(0);
+   opacity: .5;
+   transition: transform .4s ease, opacity .6s ease-in-out, color .4s ease;
+   z-index: 1;
+}
+
+#pipactive,
+#nojs {
+   color: var(--contentColor);
+   font-size: 20px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#secBox {
+   color: transparent;
+   font-family: "Rethink Sans";
+   font-weight: 400;
+   font-size: 55px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#time {
+   font-family: "Rethink Sans", "Kosugi";
+   font-weight: 400;
+   line-height: 0.9;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#houminBox {
+   font-size: 68px;
+   text-align: center;
+}
+
+#datedayBox {
+   font-size: 15px;
+   text-align: center;
+}
+
+#menuBtn {
+   top: 8vmin;
+   left: 8vmin;
+   position: relative;
+   width: 50px;
+   height: 44px;
+   cursor: pointer;
+   transition: all .4s ease;
+   transform: translateX(0);
+   z-index: 2;
+}
+
+#menuBtn span {
+   position: absolute;
+   left: 0;
+   width: 100%;
+   height: 4px;
+   background-color: var(--contentColor);
+   border-radius: 4px;
+   transition: all .5s ease;
+}
+
+#menuBtn span:nth-of-type(1) {
+   top: 0;
+}
+
+#menuBtn span:nth-of-type(2) {
+   top: 20px;
+}
+
+#menuBtn span:nth-of-type(3) {
+   bottom: 0;
+}
+
+#menuBtn.open span:nth-of-type(1),
+#menuBtn.open span:nth-of-type(3) {
+   width: 20px;
+}
+
+#menuBtn.open span:nth-of-type(1) {
+   -webkit-transform: translate(-1px, 13px) rotate(-45deg);
+   transform: translate(-1px, 13px) rotate(-45deg);
+}
+
+#menuBtn.open span:nth-of-type(3) {
+   -webkit-transform: translate(-1px, -13px) rotate(45deg);
+   transform: translate(-1px, -13px) rotate(45deg);
+}
+
+#menuBtn.open {
+   transform: translateX(290px);
+}
+
+#mask {
+   display: none;
+}
+
+#mask.open {
+   display: flex;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 3;
+   cursor: pointer;
+}
+
+#menu {
+   color: #eee;
+   font-family: "Rethink Sans", "Kosugi";
+   display: flex;
+   position: fixed;
+   top: 0;
+   left: -302px;
+   width: 300px;
+   height: 100%;
+   background-color: #222;
+   border-right: solid 2px #444;
+   overflow: auto;
+   transition: all .4s ease;
+   z-index: 4;
+   opacity: 0;
+   flex-direction: column;
+}
+
+#menu.open {
+   left: 0;
+   opacity: 1;
+}
+
+#settings {
+   flex-direction: column;
+   margin: 45px 0 20px 10px;
+   display: none;
+   transition: all .2s;
+   flex: 1;
+}
+
+#menuAccess {
+   font-size: 10.2px;
+   margin: 40px 10px 0 15px;
+}
+
+#about {
+   text-align: center;
+   font-size: 24px;
+   margin: 20px 0 ;
+   display: none;
+   cursor: pointer;
+   transition: all .4s;
+}
+
+#about:hover {
+   color: #fd0;
+   font-size: 26px;
+}
+
+input {
+   cursor: pointer;
+}
+
+label {
+   cursor: pointer;
+   width: fit-content;
+   display: flex;
+   align-items: center;
+}
+
+.switch {
+   position: relative;
+   display: inline-block;
+   width: 65px;
+   height: 35px;
+   margin: 3px 15px 3px 15px;
+}
+
+.switch input {
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+
+.slider,
+.slider2,
+.slider3 {
+   position: absolute;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #ccc;
+   transition: .4s;
+   border-radius: 34px;
+}
+
+.slider:before,
+.slider2:before,
+.slider3:before {
+   position: absolute;
+   content: "";
+   height: 26px;
+   width: 26px;
+   left: 4px;
+   bottom: 4px;
+   background-color: #fff;
+   transition: .4s;
+   border-radius: 50%;
+}
+
+input:checked+.slider {
+   background-color: #3e3;
+}
+
+input:checked+.slider2 {
+   background-color: #0cd;
+}
+
+input:checked+.slider3 {
+   background-color: #fd0;
+}
+
+input:checked+.slider:before,
+input:checked+.slider2:before,
+input:checked+.slider3:before {
+   transform: translateX(31px);
+}
+
+#bgColor,
+#contentColor,
+#saveBtn,
+#deleteBtn,
+#getHEXBtn {
+   margin: 3px 15px 3px 15px;
+   width: 65px;
+   height: 30px;
+   background-color: #ddd;
+   border: solid 1px #000;
+   border-radius: 10px;
+   outline: none;
+   box-shadow: none;
+   cursor: pointer;
+}
+
+.colorSample {
+   width: 32px;
+   height: 32px;
+   border: solid 1px #bbb;
+   font-size: 9px;
+   border-radius: 7px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#sample1 {
+   background-color: #333;
+   color: #ed8
+}
+
+#sample2 {
+   background-color: #000;
+   color: #fff;
+}
+
+#sample3 {
+   background-color: #fff;
+   color: #000;
+}
+
+#sample4 {
+   background-color: #aaa;
+   color: #333;
+}
+
+#sampleSaved {
+   width: 32px;
+   height: 32px;
+   border: solid 1px #bbb;
+   font-size: 9px;
+   border-radius: 7px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#sampleInput {
+   background-color: #124;
+   color: #fff;
+}
+
+#selfColorBtn {
+   text-decoration: underline;
+}
+
+#selfColorBtn:hover {
+   color: #ccc;
+}
+
+#selfColorBtn::before {
+   content: "▶";
+   display: inline-block;
+   transition: transform .5s ease;
+   margin-right: 3px;
+}
+
+#selfColorBtn[aria-expanded="true"]::before {
+   transform: rotate(450deg);
+}
+
+#selfColorBox {
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height .5s ease-out;
+}
+
+#selfColorBtn[aria-expanded="true"]+#selfColorBox {
+   max-height: 250px;
+}
