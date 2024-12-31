@@ -19,11 +19,36 @@
       loadCheck.checked = true;
    }
 
+   if (circlock_savedLoadChecked !== "true") {
+      window.addEventListener("load", () => {
+         Container.style.display = "none";
+         menuBtn.style.display = "none";
+         setTimeout(() => {
+            loadOverlayOpenLoad();
+         }, 70)
+         
+         loadCloseBtn.addEventListener("click", () => {
+            loadOverlayClose();
+         })
+      });
+   }
+
+   function loadOverlayOpenLoad() {
+      loadCircle.style.display = "flex";
+      loadOverlay.style.display = "flex";
+      loadCircle.style.animation = "expand .95s cubic-bezier(.5, .05, .5, 1) forwards";
+      
+      setTimeout(() => {
+            loadOverlay.style.opacity = "1";
+            loadOverlay.style.transform = "scale(1)";
+      }, 650)
+   }
+
    function loadOverlayOpen() {
       loadCircle.style.display = "flex";
-      loadCircle.style.animation = "expand .5s ease-in forwards";
       loadOverlay.style.display = "flex";
-
+      loadCircle.style.animation = "expand .5s ease-in forwards";
+      
       setTimeout(() => {
             loadOverlay.style.opacity = "1";
             loadOverlay.style.transform = "scale(1)";
@@ -48,16 +73,6 @@
             loadOverlay.style.display = "none";
             loadCircle.style.display = "none";
       }, 650)
-   }
-
-   if (circlock_savedLoadChecked !== "true") {
-      loadOverlayOpen();
-      Container.style.display = "none";
-      menuBtn.style.display = "none";
-
-      loadCloseBtn.addEventListener("click", () => {
-      loadOverlayClose();
-      })
    }
 // #endregion
 // #region Access timestamp and streaks
@@ -663,7 +678,7 @@
             Container.style.transform = "translate(-50%, -50%) scale(1)";
       }
    }
-   window.onload = function () {
+   window.addEventListener("load", () => {
       const minDimension = Math.min(window.innerWidth, window.innerHeight); // 再計算
 
       if (minDimension < 300) {
@@ -674,7 +689,7 @@
       }
       Container.style.opacity = "1";
       setTimeout(adjustScale, 400);
-   };
+   });
    window.addEventListener("resize", () => {
       if (!onMenuResize && !ispip) {
             adjustScale();
